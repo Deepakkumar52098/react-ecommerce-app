@@ -1,0 +1,97 @@
+.nav-container{
+    height:60px;
+    /* background-color: skyblue; */
+  }
+
+ 
+  
+
+
+  
+  .wrapper{
+    height:100%;
+    padding:10px 20px;
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .nav-left{
+    flex: 1;
+    display: flex;
+    align-items: center;
+    margin:0;
+  }
+  
+  .nav-center{
+    flex: 1;
+    text-align: center;
+    margin: 0;
+  }
+  
+  .nav-right{
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin:0
+  }
+  
+  .language{
+    font-size: 14px;
+    cursor: pointer;
+  }
+
+  @media only screen and (max-width: 380px) {
+    .language{
+      display: none;
+    }
+  }
+
+  .nav-search{
+      border: 0.5px solid grey;
+      display: flex;
+      align-items: center;
+      margin-left: 25px;
+      padding: 5px;
+  }
+  @media only screen and (max-width: 380px) {
+    .nav-search{
+      display: none;
+    }
+  }
+
+  .nav-input{
+      border: none;
+  }
+
+  .nav-logo{
+      font-weight: bold;
+  }
+
+  .right-menu{
+      font-size: 14px;
+      cursor: pointer;
+      margin-left: 25px;
+  }
+  
+  .nav-search-icon{
+      color: grey;
+  }
+
+  .badge {
+    padding-left: 9px;
+    padding-right: 9px;
+    -webkit-border-radius: 9px;
+    -moz-border-radius: 9px;
+    border-radius: 9px;
+  }
+  
+  .lblCartCount {
+      font-size: 10px;
+      background: #ff0000;
+      color: #fff;
+      padding: 0 5px;
+      vertical-align:top;
+      margin-left: -10px; 
+  }

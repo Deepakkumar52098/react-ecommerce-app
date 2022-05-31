@@ -1,0 +1,72 @@
+.f-container{
+    display: flex;
+}
+
+.f-left{
+    flex:1;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.f-description{
+  margin: 20px 0px;  
+}
+
+.f-socialContainer{
+    display: flex;
+    /* align-items: center;
+    justify-content: center; */
+}
+
+.f-socialIcon{
+width: 40px;
+height: 40px;
+border-radius: 50%;
+color: white;
+display: flex;
+align-items: center;
+justify-content: center;
+margin-right: 20px;
+}
+
+.f-center{
+    flex:1;
+    padding: 20px;
+}
+
+.f-right{
+    flex:1;
+    padding: 20px;
+}
+
+.f-title{
+margin-bottom: 30px;
+}
+
+.f-list{
+margin: 0;
+padding: 0;
+list-style: none;
+display: flex;
+flex-wrap: wrap;
+}
+
+.f-listItem{
+width: 50%;
+margin-bottom: 10px;
+}
+
+.f-listItem:hover{
+    cursor: pointer;
+}
+
+.f-contactItem{
+margin-bottom: 20px;
+display: flex;
+align-items: center;
+}
+
+.f-payment{
+width: 50%;
+}
