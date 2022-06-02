@@ -94,6 +94,14 @@
     font-weight: 500;
 }
 
+.p-button-disabled {
+    padding: 15px;
+    border: 2px solid rgb(102, 174, 237);
+    background-color: rgb(226, 219, 219);
+    font-weight: 500;
+    color:black
+}
+
 .p-button:hover {
     cursor: pointer;
     background-color: #f8f4f4;

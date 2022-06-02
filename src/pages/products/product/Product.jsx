@@ -1,55 +1,106 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './product.css'
 import { MdRemove, MdAdd } from "react-icons/md";
-
-
+import { useLocation } from 'react-router-dom';
+import * as api from '../../../api/api';
 
 const Product = () => {
-    const backgroundColor = ["black", "darkblue", "gray"]
+    const location = useLocation()
+    const id = location.pathname.split("/")[2]
+    const [product, setProduct] = useState({ size: [], color: [] })
+    const [quantity, setQuantity] = useState(1)
+    const [color, setColor] = useState("")
+    const [size, setSize] = useState("")
+
+    useEffect(() => {
+        const getProduct = async () => {
+            const response = await api.getProductById(id)
+            setProduct(response.data)
+        }
+        getProduct();
+    }, [id])
+
+    const handleQunatity = (type) => {
+        if (type === "dec") {
+            quantity > 0 && setQuantity(quantity - 1)
+        } else {
+            setQuantity(quantity + 1)
+        }
+    }
+
+    const handleAddToCart = async () => {
+        const cartData = {
+            userId: "1",
+            products: [
+                {
+                    productId: id,
+                    quantity,
+                    color,
+                    size
+                }
+            ]
+        }
+        const response = await api.addToCart(cartData)
+        response && alert("Product added to cart successfully!")
+    }
+
     return (
         <div className='p-container'>
             <div className="p-wrapper">
                 <div className="p-imageContainer">
-                    <img src="https://i.ibb.co/S6qMxwr/jean.jpg" alt="" className="p-image" />
+                    <img src={product.image} alt="" className="p-image" />
                 </div>
                 <div className="p-infoContainer">
-                    <h1 className="p-title">Denim Jumpsuit</h1>
-                    <p className="p-description">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
-                        venenatis, dolor in finibus malesuada, lectus ipsum porta nunc, at
-                        iaculis arcu nisi sed mauris. Nulla fermentum vestibulum ex, eget
-                        tristique tortor pretium ut. Curabitur elit justo, consequat id
-                        condimentum ac, volutpat ornare.
-                    </p>
-                    <span className="p-price"> $ 20</span>
+                    <h1 className="p-title">{product.title}</h1>
+                    <p className="p-description">{product.description}</p>
+                    <span className="p-price">Rs. {product.price}</span>
                     <div className="p-filterContainer">
                         <div className="p-filter">
                             <span className="p-filterTitle">Color</span>
-                            {
-                                backgroundColor.map(color => (
-                                    <div className="p-filterColor" style={{ backgroundColor: `${color}` }}>
-                                    </div>
-                                ))
-                            }
+                            {product.color.map(color => (
+                                <div
+                                    className="p-filterColor"
+                                    key={color}
+                                    style={{ backgroundColor: `${color}` }}
+                                    onClick={() => setColor(color)}>
+                                </div>
+                            ))}
                         </div>
                         <div className="p-filter">
                             <span className="p-filterTitle">Size</span>
-                            <select name="" id="" className="p-filterSize">
-                                <option>XS</option>
-                                <option>S</option>
-                                <option>M</option>
-                                <option>L</option>
-                                <option>XL</option>
+                            <select className="p-filterSize"
+                                name=""
+                                id=""
+                                onChange={(e) => setSize(e.target.value)}>
+                                {product.size.map(size => (
+                                    <option
+                                        name={size}
+                                        key={size}
+                                        value={size}
+                                    >{size}
+                                    </option>
+                                ))}
                             </select>
                         </div>
                     </div>
                     <div className="p-addContainer">
                         <div className="p-amountContainer">
-                            <MdRemove className='p-icon' size="1.3em" />
-                            <span className="p-amount">1</span>
-                            <MdAdd className='p-icon' size="1.3em" />
+                            <MdRemove
+                                className='p-icon'
+                                size="1.3em"
+                                onClick={() => handleQunatity("dec")} />
+                            <span className="p-amount">{quantity}</span>
+                            <MdAdd
+                                className='p-icon'
+                                size="1.3em"
+                                onClick={() => handleQunatity("inc")} />
                         </div>
-                        <button className="p-button">ADD TO CART</button>
+                        <button
+                            className={!quantity >= 1 ? "p-button-disabled" : "p-button"}
+                            disabled={!quantity >= 1}
+                            onClick={handleAddToCart}>
+                            ADD TO CART
+                        </button>
                     </div>
                 </div>
             </div>

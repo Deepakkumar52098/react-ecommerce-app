@@ -1,5 +1,5 @@
-import axios from 'axios'
 import React, { useEffect, useState } from 'react'
+import * as api from '../../api/api'
 import ProductItem from './productItem/ProductItem'
 import './products.css'
 
@@ -10,15 +10,10 @@ const Products = ({ category, filters, sort }) => {
 
   useEffect(() => {
     const getProducts = async () => {
-      try {
-        const res = await axios.get(
-          category
-            ? `http://localhost:4000/api/product/allProducts?category=${category}`
-            : "http://localhost:4000/api/product/allProducts")
-        setProducts(res.data)
-      } catch (e) {
-        console.log(e)
-      }
+      const response = category ?
+        await api.getAllProductsWithCategory(category) :
+        await api.getAllProducts()
+      setProducts(response.data)
     }
     getProducts();
   }, [category])
@@ -42,16 +37,13 @@ const Products = ({ category, filters, sort }) => {
       setFilteredProducts((prev) =>
         [...prev].sort((a, b) => b.price - a.price))
     }
-    // console.log(filteredProducts)
   }, [sort])
 
   return (
     <div className='p-container'>
-      {
-        filteredProducts.map(product => (
-          <ProductItem product={product} key={product.id} />
-        ))
-      }
+      {filteredProducts.map(product => (
+        <ProductItem product={product} key={product.id} />
+      ))}
     </div>
   )
 }

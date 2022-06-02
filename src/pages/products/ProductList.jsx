@@ -18,7 +18,7 @@ const ProductList = () => {
   }
   return (
     <div>
-      <h1 className='pl-title'>Dresses</h1>
+      <h1 className='pl-title'>{category}</h1>
       <div className="pl-filterContainer">
         <div className="pl-filter">
           <span className='pl-filterText'>Filter Products:</span>
