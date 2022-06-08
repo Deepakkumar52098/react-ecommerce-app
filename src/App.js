@@ -1,25 +1,28 @@
 import React from 'react';
+import {
+  BrowserRouter as Router, Navigate, Route, Routes
+} from "react-router-dom";
+import Announcement from './components/announcement/Announcement';
+import Footer from './components/footer/Footer';
+import Navbar from './components/navbar/Navbar';
+import Newsletter from './components/newsletter/Newsletter';
 import Cart from './pages/cart/Cart';
+import Home from './pages/Home';
 import Login from './pages/login/Login';
 import Product from './pages/products/product/Product';
-import Register from './pages/register/Register';
-import Home from './pages/Home';
 import ProductList from './pages/products/ProductList';
+import Register from './pages/register/Register';
 
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Link,
-  Navigate
-} from "react-router-dom"
-import Footer from './components/footer/Footer';
-import Newsletter from './components/newsletter/Newsletter';
-import Navbar from './components/navbar/Navbar';
-import Announcement from './components/announcement/Announcement';
 
 const App = () => {
   const user = true;
+  // useEffect(()=>{
+  //   const test = async () =>{
+  //     const data = await axios.get(`https://qb-employeedata-app.herokuapp.com/api/employee/employees`)
+  //     console.log(data.data.employeeCount)
+  //   }
+  //   test()
+  // },[])
   return (
     <Router>
       <Announcement />
@@ -29,8 +32,8 @@ const App = () => {
         <Route path="/products/:category" element={<ProductList />}></Route>
         <Route path="/product/:id" element={<Product />}></Route>
         <Route path="/cart" element={<Cart />}></Route>
-        <Route path="/login" element={ user ? <Navigate to="/"/> : <Login />}></Route>
-        <Route path="/register" element={ user ? <Navigate to="/"/> : <Register />}></Route>
+        <Route path="/login" element={user ? <Navigate to="/" /> : <Login />}></Route>
+        <Route path="/register" element={user ? <Navigate to="/" /> : <Register />}></Route>
       </Routes>
       <Newsletter />
       <Footer />

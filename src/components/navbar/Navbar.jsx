@@ -1,9 +1,12 @@
 import React from "react"
 import './navbar.css'
 import { MdSearch, MdShoppingCart } from "react-icons/md";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 
 const Navbar = () => {
+    const quantity = useSelector(state => state.cart.quantity)
     return (
         <div className='nav-container'>
             <div className='wrapper'>
@@ -20,10 +23,12 @@ const Navbar = () => {
                 <div className='nav-right'>
                     <div className="right-menu">REGISTER</div>
                     <div className="right-menu">LOGIN</div>
-                    <div className="right-menu">
-                        <MdShoppingCart className="kart-icon" size="1.7em" />
-                        <span className='badge lblCartCount'> 5 </span>
-                    </div>
+                    <Link to="/cart">
+                        <div className="right-menu">
+                            <MdShoppingCart className="kart-icon" size="1.7em" />
+                            <span className='badge lblCartCount'> {quantity} </span>
+                        </div>
+                    </Link>
                 </div>
             </div>
         </div>

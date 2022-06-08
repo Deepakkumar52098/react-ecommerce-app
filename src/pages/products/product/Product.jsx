@@ -3,6 +3,8 @@ import './product.css'
 import { MdRemove, MdAdd } from "react-icons/md";
 import { useLocation } from 'react-router-dom';
 import * as api from '../../../api/api';
+import { addProduct } from '../../../redux/cartRedux';
+import { useDispatch } from 'react-redux';
 
 const Product = () => {
     const location = useLocation()
@@ -11,14 +13,23 @@ const Product = () => {
     const [quantity, setQuantity] = useState(1)
     const [color, setColor] = useState("")
     const [size, setSize] = useState("")
+    const [amountToBePaid, setAmountToBePaid] = useState(0)
 
     useEffect(() => {
         const getProduct = async () => {
             const response = await api.getProductById(id)
             setProduct(response.data)
+            setColor(response.data?.color[0])
+            setSize(response.data?.size[0])
         }
         getProduct();
     }, [id])
+
+    useEffect(()=>{
+        setAmountToBePaid(quantity * product.price)
+    },[quantity,product])
+
+    const dispatch = useDispatch()
 
     const handleQunatity = (type) => {
         if (type === "dec") {
@@ -29,6 +40,7 @@ const Product = () => {
     }
 
     const handleAddToCart = async () => {
+        dispatch(addProduct({ ...product, size, color, quantity, amountToBePaid }))
         const cartData = {
             userId: "1",
             products: [
@@ -55,7 +67,7 @@ const Product = () => {
                     <p className="p-description">{product.description}</p>
                     <span className="p-price">Rs. {product.price}</span>
                     <div className="p-filterContainer">
-                        <div className="p-filter">
+                        {color && <div className="p-filter">
                             <span className="p-filterTitle">Color</span>
                             {product.color.map(color => (
                                 <div
@@ -65,8 +77,8 @@ const Product = () => {
                                     onClick={() => setColor(color)}>
                                 </div>
                             ))}
-                        </div>
-                        <div className="p-filter">
+                        </div>}
+                        {size && <div className="p-filter">
                             <span className="p-filterTitle">Size</span>
                             <select className="p-filterSize"
                                 name=""
@@ -81,7 +93,7 @@ const Product = () => {
                                     </option>
                                 ))}
                             </select>
-                        </div>
+                        </div>}
                     </div>
                     <div className="p-addContainer">
                         <div className="p-amountContainer">
