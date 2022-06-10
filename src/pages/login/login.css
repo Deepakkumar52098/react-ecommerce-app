@@ -43,6 +43,16 @@
     margin-bottom: 10px;
 }
 
+.l-button-disabled{
+    width: 40%;
+    border: none;
+    padding: 15px 20px;
+    background-color: gray;
+    color: black;
+    cursor: not-allowed;
+    margin-bottom: 10px;
+}
+
 .l-link {
     margin: 5px 0px;
     font-size: 12px;

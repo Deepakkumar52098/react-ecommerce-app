@@ -1,5 +1,5 @@
 import React from "react";
-import { MdOutlineRemove, MdOutlineAdd } from "react-icons/md";
+import { MdOutlineRemove, MdOutlineAdd, MdDelete } from "react-icons/md";
 import { useSelector } from "react-redux";
 import './cart.css'
 
@@ -47,9 +47,13 @@ const Cart = () => {
                                     </div>
                                     <div className="k-priceDetail">
                                         <div className="k-productAmountContainer">
-                                            <MdOutlineAdd className="k-add" size="1.3em" />
+                                            {product.quantity > 0
+                                             ? <MdOutlineRemove className="k-remove" size="1.3em" />
+                                             :<MdDelete className="k-delete" size="1.3em"/>
+                                             }
                                             <div className="k-productAmount">{product.quantity}</div>
-                                            <MdOutlineRemove className="k-remove" size="1.3em" />
+                                            <MdOutlineAdd className="k-add" size="1.3em" />
+
                                         </div>
                                         <div className="k-productPrice">INR {product.price}</div>
                                     </div>

@@ -22,7 +22,9 @@ const Navbar = () => {
                 </div>
                 <div className='nav-right'>
                     <div className="right-menu">REGISTER</div>
+                    <Link to="/login">
                     <div className="right-menu">LOGIN</div>
+                    </Link>
                     <Link to="/cart">
                         <div className="right-menu">
                             <MdShoppingCart className="kart-icon" size="1.7em" />

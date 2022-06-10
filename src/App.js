@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import {
   BrowserRouter as Router, Navigate, Route, Routes
 } from "react-router-dom";
@@ -15,7 +16,7 @@ import Register from './pages/register/Register';
 
 
 const App = () => {
-  const user = true;
+  const user = useSelector(state=>state.user.loggedIn)
   // useEffect(()=>{
   //   const test = async () =>{
   //     const data = await axios.get(`https://qb-employeedata-app.herokuapp.com/api/employee/employees`)

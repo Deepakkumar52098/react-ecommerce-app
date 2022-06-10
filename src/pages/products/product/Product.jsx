@@ -3,7 +3,7 @@ import './product.css'
 import { MdRemove, MdAdd } from "react-icons/md";
 import { useLocation } from 'react-router-dom';
 import * as api from '../../../api/api';
-import { addProduct } from '../../../redux/cartRedux';
+import { addProduct } from '../../../redux/reducers/cartReducer';
 import { useDispatch } from 'react-redux';
 
 const Product = () => {

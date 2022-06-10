@@ -123,23 +123,7 @@
 }
 
 .k-add,
-.k-remove {
+.k-remove,
+.k-delete {
     cursor: pointer;
 }
-
-
-/* 
-const TopButton = styled.button`
-  border: ${(props) => props.type === "filled" && "none"};
-  background-color: ${(props) =>
-    props.type === "filled" ? "black" : "transparent"};
-  color: ${(props) => props.type === "filled" && "white"};
-`;
-
-const SummaryItem = styled.div`
-  
-  font-weight: ${(props) => props.type === "total" && "500"};
-  font-size: ${(props) => props.type === "total" && "24px"};
-`;
- 
-`; */
